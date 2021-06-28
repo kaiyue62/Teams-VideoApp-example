@@ -9,7 +9,28 @@ let appliedEffect = {
 // This is the effect linked with UI
 let uiSelectedEffect = {};
 
+let errorType={
+  none:0,
+  slow:1,
+  frozen:2
+}
+
+let error=errorType.none;
+
 let errorOccurs = false;
+
+function videoFrameErrorHandler(){
+  let timeout=0;
+  if(error===errorType.slow){
+    timeout=2000;
+  }else if(error===errorType.frozen){
+    timeout=5000;
+  }
+  setTimeout(() => {
+    videoFrameErrorHandler();
+  }, timeout);
+}
+
 //Sample video effect
 function videoFrameHandler(videoFrame, notifyVideoProcessed, notifyError) {
   const maxLen =
@@ -50,7 +71,7 @@ function effectParameterChanged(effectName) {
 }
 
 microsoftTeams.video.registerForVideoEffect(effectParameterChanged);
-microsoftTeams.video.registerForVideoFrame(videoFrameHandler, {
+microsoftTeams.video.registerForVideoFrame(videoFrameErrorHandler, {
   format: "NV12",
 });
 
@@ -69,5 +90,11 @@ document.getElementById("proportion").addEventListener("change", function () {
 document.getElementById("pixel_value").addEventListener("change", function () {
   uiSelectedEffect.pixelValue = this.value;
   microsoftTeams.video.notifySelectedVideoEffectChanged("EffectChanged");
+});
+document.getElementById('slow-btn').addEventListener('click',function(){
+  error=errorType.slow;
+});
+document.getElementById('frozen-btn').addEventListener('click',function(){
+  error=errorType.frozen;
 });
 microsoftTeams.appInitialization.notifySuccess();
