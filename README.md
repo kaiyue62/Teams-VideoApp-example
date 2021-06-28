@@ -3,7 +3,7 @@
 ## Install the video app in Teams
 1. Host the app directory in a public accessible HTTPS server. You can use github page as the host.
 2. Replace the `name`, `appId`, and `contentUrl` in `meta/manifest.json`.
-    1. The contentUrl should point to your app directory, like `https://lubobill1990.github.io/Teams-VideoApp-example/app/`
+    1. The contentUrl should point to your app directory, like `https://kaiyue62.github.io/Teams-VideoApp-example/app/`
     2. appId can be any unique GUID
 3. zip the meta directory, choose the zip file after clicking Upload a custom app
 4. Go to a teams meeting, enable the video, and activate the video app.
