@@ -19,7 +19,7 @@ let error=errorType.none;
 
 let errorOccurs = false;
 
-function videoFrameErrorHandler(){
+function videoFrameErrorHandler(videoFrame, notifyVideoProcessed, notifyError){
   let timeout=0;
   if(error===errorType.slow){
     timeout=2000;
@@ -27,7 +27,7 @@ function videoFrameErrorHandler(){
     timeout=5000;
   }
   setTimeout(() => {
-    videoFrameErrorHandler();
+    videoFrameErrorHandler(videoFrame, notifyVideoProcessed, notifyError);
   }, timeout);
 }
 
