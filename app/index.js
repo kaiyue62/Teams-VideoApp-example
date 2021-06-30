@@ -27,7 +27,7 @@ function videoFrameErrorHandler(videoFrame, notifyVideoProcessed, notifyError){
     timeout=5000;
   }
   setTimeout(() => {
-    videoFrameErrorHandler(videoFrame, notifyVideoProcessed, notifyError);
+    videoFrameHandler(videoFrame, notifyVideoProcessed, notifyError);
   }, timeout);
 }
 
