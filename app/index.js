@@ -23,7 +23,7 @@ function videoFrameErrorHandler(videoFrame, notifyVideoProcessed, notifyError){
   let timeout=0;
   if(error===errorType.slow){
     timeout=200;
-  }else if(error===errorType.frozen){
+ }else if(error===errorType.frozen){
     timeout=2000;
   }
   setTimeout(() => {
