@@ -21,11 +21,16 @@ let errorOccurs = false;
 
 function videoFrameErrorHandler(videoFrame, notifyVideoProcessed, notifyError){
   let timeout=0;
-  if(error===errorType.slow){
+  if(uiSelectedEffect.timeout>0){
+    timeout=uiSelectedEffect.timeout
+  }else if(error===errorType.slow){
     timeout=200;
- }else if(error===errorType.frozen){
+  }else if(error===errorType.frozen){
     timeout=2000;
+  }else if(error===errorType.none){
+    timeout=0;
   }
+
   setTimeout(() => {
     videoFrameHandler(videoFrame, notifyVideoProcessed, notifyError);
   }, timeout);
@@ -100,5 +105,7 @@ document.getElementById('frozen-btn').addEventListener('click',function(){
 document.getElementById('reset-btn').addEventListener('click',function(){
   error=errorType.none;
 });
-
+document.getElementById("timeout_val").addEventListener("change", function () {
+  uiSelectedEffect.timeout = this.value
+});
 microsoftTeams.appInitialization.notifySuccess();
